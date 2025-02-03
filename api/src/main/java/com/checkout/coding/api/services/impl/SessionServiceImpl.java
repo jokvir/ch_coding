@@ -27,7 +27,7 @@ public class SessionServiceImpl implements SessionService {
         if (sessionRepository.findAll().isEmpty()) {
             Session padel = Session.builder().price(BigDecimal.valueOf(30)).type(Session.SessionType.Padel).build();
             Session Fitness = Session.builder().price(BigDecimal.valueOf(45)).type(Session.SessionType.Tennis).build();
-            Session Tennis = Session.builder().price(BigDecimal.valueOf(15)).type(Session.SessionType.Tennis).build();
+            Session Tennis = Session.builder().price(BigDecimal.valueOf(15)).type(Session.SessionType.Fitness).build();
             sessionRepository.saveAll(List.of(padel, Fitness, Tennis));
         }
         return 0;

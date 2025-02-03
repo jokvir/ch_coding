@@ -34,7 +34,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking createBooking(BookingRequest request) {
-        // Validate user details
         if (request.customerName() == null || request.email() == null || request.phone() == null) {
             throw new IllegalArgumentException("Missing customer details");
         }
@@ -48,12 +47,10 @@ public class BookingServiceImpl implements BookingService {
                 .filter(Objects::nonNull)
                 .toList();
 
-        // Calculate total price
         BigDecimal totalPrice = sessions.stream()
                 .map(Session::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // Create booking entity
         Booking booking = Booking.builder()
                 .customerName(request.customerName())
                 .customerEmail(request.email())
@@ -99,7 +96,7 @@ public class BookingServiceImpl implements BookingService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
-        message.setFrom("your-email@gmail.com"); // Facultatif, sinon celui de la config est utilisé
+        message.setFrom("your-email@gmail.com");
 
         mailSender.send(message);
     }
